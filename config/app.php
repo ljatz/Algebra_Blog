@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Zagreb',
 
     /*
     |--------------------------------------------------------------------------
@@ -141,6 +141,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+		
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -167,6 +168,8 @@ return [
         /*
          * Package Service Providers...
          */
+		 
+		Centaur\CentaurServiceProvider::class,
 
         /*
          * Application Service Providers...
