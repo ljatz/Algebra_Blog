@@ -28,12 +28,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Centaur</a>
+                    <a class="navbar-brand" href="/">Algebra Blog</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="{{ Request::is('/dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="{{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+						@if(Sentinel::check())
+							<li class="{{ Request::is('posts*') ? 'active' : '' }}"><a href="{{ route('dashboard') }}">Posts</a></li>
+						@endif
                         @if (Sentinel::check() && Sentinel::inRole('administrator'))
                             <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
                             <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
@@ -44,8 +47,8 @@
                             <li><p class="navbar-text">{{ Sentinel::getUser()->email }}</p></li>
                             <li><a href="{{ route('auth.logout') }}">Log Out</a></li>
                         @else
-                            <li><a href="{{ route('auth.login.form') }}">Login</a></li>
-                            <li><a href="{{ route('auth.register.form') }}">Register</a></li>
+                            <li class="{{ Request::is('login') ? 'active' : '' }}"><a href="{{ route('auth.login.form') }}">Login</a></li>
+                            <li class="{{ Request::is('register') ? 'active' : '' }}"><a href="{{ route('auth.register.form') }}">Register</a></li>
                         @endif
                     </ul>
                 </div><!-- /.navbar-collapse -->
