@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+		$this->app->bind('Centaur\Middleware\SentinelAuthenticate', function ($app) {
+			return new \App\Http\Middleware\SentinelAuthenticate;
+		});
     }
 }

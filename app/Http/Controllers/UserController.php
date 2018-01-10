@@ -167,7 +167,7 @@ class UserController extends Controller
         ];
 
         // Do we need to update the password as well?
-        if ($request->has('password')) {
+        if ($request->get('password') !== null) {
             $attributes['password'] = $request->get('password');
         }
 
