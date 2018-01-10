@@ -156,7 +156,7 @@ class UserController extends Controller
         // Validate the form data
         $result = $this->validate($request, [
             'email' => 'required|email|max:255|unique:users,email,'.$id,
-            'password' => 'nullable|confirmed|min:6',
+            'password' => 'nullable|confirmed|min:8',
         ]);
 
         // Assemble the updated attributes
