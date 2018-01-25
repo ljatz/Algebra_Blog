@@ -80,10 +80,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 		
 		if(Sentinel::getUser()->id === $post->user_id || Sentinel::inRole('administrator')) {
-
+			return view('posts.edit')->with('post', $post);
 		} else {
 			session()->flash('info','You can\'t edit this post');
 			return redirect()->route('posts.index');
@@ -97,9 +97,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePost $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+		
+		$post_data = array(
+			'title'		=> $request->get('title'),
+			'content' 	=> $request->get('content')
+			);
+			
+		if(Sentinel::getUser()->id === $post->user_id || Sentinel::inRole('administrator')) {
+			$post->updatePost($post_data);
+		} else {
+			session()->flash('info','You can\'t update this post');
+			return redirect()->route('posts.index');
+		}
+		
+		session()->flash('info','You have successfully update a post.');
+		return redirect()->route('posts.index');
+			
     }
 
     /**
@@ -110,6 +126,16 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+		
+		if(Sentinel::getUser()->id === $post->user_id || Sentinel::inRole('administrator')) {
+			$post->delete();
+		} else {
+			session()->flash('info','You can\'t delete this post');
+			return redirect()->route('posts.index');
+		}
+		
+		session()->flash('info','You have successfully delete post');
+		return redirect()->route('posts.index');
     }
 }

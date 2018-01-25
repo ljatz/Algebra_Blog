@@ -38,7 +38,7 @@
 								</td>
 								<td>
 									<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-default btn-sm">Edit</a>
-									<a href="#" class="btn btn-danger btn-sm">Delete</a>
+									<a href="{{ route('posts.destroy', $post->id) }}" class="btn btn-danger btn-sm action_confirm" data-method="delete" data-token="{{ csrf_token() }}">Delete</a>
 								</td>
 							</tr>
 						@endforeach
