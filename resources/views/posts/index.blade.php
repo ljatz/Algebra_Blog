@@ -26,7 +26,7 @@
 					<tbody>
 						@foreach ($posts as $post)
 							<tr>
-								<td>{{ $post->title }}</td>
+								<td>{{ str_limit($post->title, 30) }}</td>
 								<td>{{ $post->user['email'] }}</td><!--$post->user->email-->
 								<td>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</td>
 								<td>
